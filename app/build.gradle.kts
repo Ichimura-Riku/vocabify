@@ -54,6 +54,7 @@ android {
 val ktlint by configurations.creating
 
 dependencies {
+    val room_version = "2.5.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -74,6 +75,11 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48.1") // 変更
     ksp("com.google.dagger:hilt-android-compiler:2.48.1") // 変更
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     ktlint("com.pinterest.ktlint:ktlint-cli:1.0.1") {
         attributes {
