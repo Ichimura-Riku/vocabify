@@ -12,7 +12,7 @@ data class Learn(
     val word: String,
     @ColumnInfo(name = "translation")
     val translation: String,
-    @ColumnInfo(name = "isLook")
+    @ColumnInfo(name = "is_look")
     val isLook: Int,
 
     )
