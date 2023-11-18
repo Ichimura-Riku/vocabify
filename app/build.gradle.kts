@@ -47,6 +47,8 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/INDEX.LIST"
+            excludes += "META-INF/DEPENDENCIES"
         }
     }
 }
@@ -80,6 +82,11 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    implementation("com.google.cloud:gapic-google-cloud-ai-generativelanguage-v1beta3-java:0.0.0-SNAPSHOT")
+    implementation("io.grpc:grpc-okhttp:1.53.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
 
     ktlint("com.pinterest.ktlint:ktlint-cli:1.0.1") {
         attributes {
