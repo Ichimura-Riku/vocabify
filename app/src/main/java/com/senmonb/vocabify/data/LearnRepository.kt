@@ -3,7 +3,6 @@ package com.senmonb.vocabify.data
 import kotlinx.coroutines.flow.Flow
 
 interface LearnRepository {
-
     // 新たにtodoを入れるためのメソッド。おそらく、gpt系のAPIで使用する
     suspend fun insertLearn(learn: Learn)
 

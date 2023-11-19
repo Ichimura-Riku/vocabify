@@ -16,8 +16,9 @@ import javax.inject.Singleton
 object LearnRepositoryModules {
     @Provides
     @Singleton
-    fun bindLearnRepository(@ApplicationContext context: Context): LearnRepository{
+    fun bindLearnRepository(
+        @ApplicationContext context: Context,
+    ): LearnRepository  {
         return OfflineLearnRepository(LearnDatabase.getDatabase(context).learnDao())
     }
-
 }

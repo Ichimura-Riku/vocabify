@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Learn::class], version = 1, exportSchema = false)
 abstract class LearnDatabase : RoomDatabase() {
-
     abstract fun learnDao(): LearnDao
 
     companion object {

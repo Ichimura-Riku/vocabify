@@ -14,5 +14,4 @@ data class Learn(
     val translation: String,
     @ColumnInfo(name = "is_look")
     val isLook: Int,
-
-    )
+)
