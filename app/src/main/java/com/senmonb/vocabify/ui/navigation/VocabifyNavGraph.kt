@@ -6,6 +6,8 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.senmonb.vocabify.ui.screen.AddVocabularyDestination
+import com.senmonb.vocabify.ui.screen.AddVocabularyScreen
 import com.senmonb.vocabify.ui.screen.HomeDestination
 import com.senmonb.vocabify.ui.screen.HomeScreen
 
@@ -18,6 +20,13 @@ fun VocabifyNavHost(
     NavHost(navController = navController, startDestination = HomeDestination.route, modifier = modifier) {
         composable(route = HomeDestination.route) {
             HomeScreen(
+                modifier = modifier,
+                navAddVocabularyScreen = { navController.navigate(AddVocabularyDestination.route) },
+            )
+        }
+
+        composable(route = AddVocabularyDestination.route) {
+            AddVocabularyScreen(
                 modifier = modifier,
             )
         }

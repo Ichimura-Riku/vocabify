@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Vocabify</string>
+    <string name="add_vocabulary">add vocabulary</string>
 </resources>

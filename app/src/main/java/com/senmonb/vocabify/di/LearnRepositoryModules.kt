@@ -18,7 +18,7 @@ object LearnRepositoryModules {
     @Singleton
     fun bindLearnRepository(
         @ApplicationContext context: Context,
-    ): LearnRepository  {
+    ): LearnRepository {
         return OfflineLearnRepository(LearnDatabase.getDatabase(context).learnDao())
     }
 }
