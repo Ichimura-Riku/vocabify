@@ -1,5 +1,8 @@
 package com.senmonb.vocabify.ui.screen
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,6 +14,7 @@ import com.google.api.gax.core.FixedCredentialsProvider
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider
 import com.google.api.gax.rpc.FixedHeaderProvider
 import com.senmonb.vocabify.PaLM_KEY
+import com.senmonb.vocabify.data.Learn
 import com.senmonb.vocabify.data.LearnRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -25,8 +29,11 @@ class AddVocabularyViewModel
 @Inject
 constructor(
     savedStateHandle: SavedStateHandle,
-    learnRepository: LearnRepository,
+    private val learnRepository: LearnRepository,
 ) : ViewModel() {
+
+    private var learnUiState by mutableStateOf(LearnUiState())
+
     // UI表示用のstate
     private val _output = MutableStateFlow(value = "")
     val output: StateFlow<String>
@@ -125,4 +132,40 @@ constructor(
             }
         }
     }
+
+    suspend fun insertLearn() {
+        //  viewModelScope.launch{}
+        learnRepository.insertLearn(learnUiState.learnState.toLearn())
+    }
 }
+
+data class LearnUiState(
+    val learnState: LearnState = LearnState(),
+
+    )
+
+data class LearnState(
+    val id: Int = 0,
+    val word: String = "",
+    val translation: String = "",
+    val isLook: Boolean = false
+)
+
+
+fun LearnState.toLearn(): Learn = Learn(
+    id = 0,
+    word = "",
+    translation = "",
+    isLook = if (isLook) 1 else 0
+)
+
+fun Learn.toLearnUiState(): LearnUiState = LearnUiState(
+    learnState = this.toLearnState(),
+)
+
+fun Learn.toLearnState(): LearnState = LearnState(
+    id = 0,
+    word = "",
+    translation = "",
+    isLook = isLook == 1
+)
