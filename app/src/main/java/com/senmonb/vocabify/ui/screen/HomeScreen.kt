@@ -47,7 +47,7 @@ fun HomeContainer(
         verticalArrangement = Arrangement.Center,
     ) {
         Text("Let's Learn Vocabulary")
-        Column {
+        Column() {
 
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "add Vocabulary")
