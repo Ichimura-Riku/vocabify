@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Vocabify</string>
     <string name="add_vocabulary">add vocabulary</string>
+    <string name="learningEJ">LearningEnglishJapanese</string>
 </resources>

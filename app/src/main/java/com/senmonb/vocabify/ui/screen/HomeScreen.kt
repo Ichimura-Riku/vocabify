@@ -29,6 +29,7 @@ object HomeDestination : NavigationDestination {
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navAddVocabularyScreen: () -> Unit,
+    navLearningEJScreen: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     Scaffold { innerPadding ->
@@ -38,6 +39,7 @@ fun HomeScreen(
                     .fillMaxSize()
                     .padding(innerPadding),
             navAddVocabularyScreen = navAddVocabularyScreen,
+            navLearningEJScreen = navLearningEJScreen,
         )
     }
 }
@@ -46,6 +48,7 @@ fun HomeScreen(
 fun HomeContainer(
     modifier: Modifier = Modifier,
     navAddVocabularyScreen: () -> Unit,
+    navLearningEJScreen: () -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -70,7 +73,7 @@ fun HomeContainer(
                 Text(text = "add Vocabulary")
             }
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = navLearningEJScreen) {
                 Text(text = "learning English-Japanese")
             }
 
