@@ -1,0 +1,126 @@
+package com.senmonb.vocabify
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.ai.generativelanguage.v1beta3.GenerateTextRequest
+import com.google.ai.generativelanguage.v1beta3.TextPrompt
+import com.google.ai.generativelanguage.v1beta3.TextServiceClient
+import com.google.ai.generativelanguage.v1beta3.TextServiceSettings
+import com.google.api.gax.core.FixedCredentialsProvider
+import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider
+import com.google.api.gax.rpc.FixedHeaderProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class MainViewModel @Inject constructor() : ViewModel() {
+
+    // UI表示用のstate
+    private val _output = MutableStateFlow(value = "")
+    val output: StateFlow<String>
+        get() = _output
+
+    // リクエスト送信のための変数
+    private var client: TextServiceClient
+
+    // clientの初期化
+    init {
+        // Initialize the Text Service Client
+        client = initializeTextServiceClient(
+            apiKey = "AIzaSyAIcPo5UiXnjgPwK7c8NbgZ-fz5fhNUlp8"
+            //ぶっちゃけこっちでいい気がするんだけどどうなんだろう。この関数でさっき入力したものが返ってくるならこれでいいはず
+            //結局エラー測れたんで、推奨の実装で何とか進める。keyはpushしないように気をつける。
+//            apiKey = System.getenv("PALM_API_KEY")
+        )
+
+//        // Create the text prompt
+//        val prompt = createPrompt("Repeat after me: one, two")
+//
+//        // Send the first request
+//        val request = createTextRequest(prompt)
+//        generateText(request)
+//    }
+    }
+
+    fun sendPrompt(inputTextPrompt: String) {
+        // Create the text prompt
+        val prompt = createPrompt(inputTextPrompt)
+
+        // Send the first request
+        val request = createTextRequest(prompt)
+        generateText(request)
+
+    }
+
+    // テキスト サービス クライアントの初期化
+    private fun initializeTextServiceClient(
+        apiKey: String
+    ): TextServiceClient {
+        // (This is a workaround because GAPIC java libraries don't yet support API key auth)
+        val transportChannelProvider = InstantiatingGrpcChannelProvider.newBuilder()
+            .setHeaderProvider(
+                FixedHeaderProvider.create(
+                    hashMapOf(
+                        "x-goog-api-key" to "AIzaSyAIcPo5UiXnjgPwK7c8NbgZ-fz5fhNUlp8"
+                    )
+                )
+            )
+            .build()
+
+        // Create TextServiceSettings
+        val settings = TextServiceSettings.newBuilder()
+            .setTransportChannelProvider(transportChannelProvider)
+            .setCredentialsProvider(FixedCredentialsProvider.create(null))
+            .build()
+
+        // Initialize a TextServiceClient
+        val textServiceClient = TextServiceClient.create(settings)
+
+        return textServiceClient
+    }
+
+    // テキスト プロンプトの作成
+    private fun createPrompt(
+        textContent: String
+    ): TextPrompt {
+        val textPrompt = TextPrompt.newBuilder()
+            .setText(textContent)
+            .build()
+
+        return textPrompt
+    }
+
+    // テキストを生成
+    private fun createTextRequest(prompt: TextPrompt): GenerateTextRequest {
+        return GenerateTextRequest.newBuilder()
+            .setModel("models/text-bison-001") // Required, which model to use to generate the result
+            .setPrompt(prompt) // Required
+            .setTemperature(0.5f) // Optional, controls the randomness of the output
+            .setCandidateCount(1) // Optional, the number of generated texts to return
+            .build()
+    }
+
+    // リクエスト送信
+
+    private fun generateText(
+        request: GenerateTextRequest
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = client.generateText(request)
+                val returnedText = response.candidatesList.last()
+                // display the returned text in the UI
+                _output.update { returnedText.output }
+            } catch (e: Exception) {
+                // There was an error, let's add a new text with the details
+                _output.update { "API Error: ${e.message}" }
+            }
+        }
+    }
+
+}
