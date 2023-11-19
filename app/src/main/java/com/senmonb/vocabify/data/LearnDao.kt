@@ -22,8 +22,8 @@ interface LearnDao {
     @Query("SELECT * from learn")
     fun getAllLearn(): Flow<List<Learn>>
 
-    @Query("SELECT * FROM learn WHERE category = :category")
-    fun getLearnByCategory(category: String): Flow<List<Learn>>
+    @Query("SELECT * FROM learn WHERE category_id = :categoryId")
+    fun getLearnByCategory(categoryId: Int): Flow<List<Learn>>
 
     @Query("SELECT * FROM learn WHERE is_look = 0")
     fun getAllUnlearned(): Flow<List<Learn>>
