@@ -21,7 +21,7 @@ fun VocabifyNavHost(
         composable(route = HomeDestination.route) {
             HomeScreen(
                 modifier = modifier,
-                navAddVocabularyScreen = { navController.navigate(AddVocabularyDestination.route) }
+                navAddVocabularyScreen = { navController.navigate(AddVocabularyDestination.route) },
             )
         }
 
@@ -30,7 +30,5 @@ fun VocabifyNavHost(
                 modifier = modifier,
             )
         }
-
-
     }
 }

@@ -46,7 +46,7 @@ fun HomeScreen(
 fun HomeContainer(
     modifier: Modifier = Modifier,
     navAddVocabularyScreen: () -> Unit,
-    ) {
+) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,7 +66,7 @@ fun HomeContainer(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(onClick =  navAddVocabularyScreen ) {
+            Button(onClick = navAddVocabularyScreen) {
                 Text(text = "add Vocabulary")
             }
 

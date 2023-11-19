@@ -16,24 +16,23 @@ object AddVocabularyDestination : NavigationDestination {
     override val titleRes = R.string.add_vocabulary
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddVocabularyScreen(
     modifier: Modifier = Modifier,
     viewModel: AddVocabularyViewModel = hiltViewModel(),
-){
+)  {
     Scaffold { innerPadding ->
         AddVocabularyContainer(
             modifier =
-            modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+                modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
         )
     }
 }
 
 @Composable
-fun AddVocabularyContainer(modifier: Modifier = Modifier){
+fun AddVocabularyContainer(modifier: Modifier = Modifier)  {
     Text(text = "add vocabulary screen")
 }
