@@ -15,6 +15,9 @@ interface LearnRepository {
     // 全ての学習用データを取得する。英和はここから出題する
     fun getAllLearn(): Flow<List<Learn>>
 
+    // categoryに該当する学習用データを取得する。
+    fun getLearnByCategory(category: String): Flow<List<Learn>>
+
     // すでに学習したデータを取得する。和英はここから出題する
     fun getAllUnlearned(): Flow<List<Learn>>
 
