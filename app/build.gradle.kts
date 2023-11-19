@@ -87,6 +87,8 @@ dependencies {
     implementation("io.grpc:grpc-okhttp:1.53.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
+    implementation("com.google.code.gson:gson:2.10.1")
+
     ktlint("com.pinterest.ktlint:ktlint-cli:1.0.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
