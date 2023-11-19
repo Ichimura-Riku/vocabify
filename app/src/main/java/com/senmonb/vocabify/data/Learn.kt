@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 data class Learn(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    @ColumnInfo(name = "category")
+    val category: String,
     @ColumnInfo(name = "word")
     val word: String,
     @ColumnInfo(name = "translation")
