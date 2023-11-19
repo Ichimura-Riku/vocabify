@@ -14,6 +14,8 @@ class OfflineLearnRepository constructor(private val learnDao: LearnDao) : Learn
 
     override fun getAllLearn(): Flow<List<Learn>> = learnDao.getAllLearn().flowOn(Dispatchers.IO)
 
+    override fun getLearnByCategory(category: String): Flow<List<Learn>> = learnDao.getLearnByCategory(category).flowOn(Dispatchers.IO)
+
     override fun getAllUnlearned(): Flow<List<Learn>> = learnDao.getAllUnlearned().flowOn(Dispatchers.IO)
 
     override fun getLearned(): Flow<List<Learn>> = learnDao.getLearned().flowOn(Dispatchers.IO)
