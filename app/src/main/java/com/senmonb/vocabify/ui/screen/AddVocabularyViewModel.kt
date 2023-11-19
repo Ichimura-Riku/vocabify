@@ -43,7 +43,16 @@ constructor(
         )
     }
 
-    fun sendPrompt(inputTextPrompt: String) {
+    fun sendPrompt(inputText: String) {
+
+        val inputTextPrompt = """
+            Generate several words related to $inputText and their Japanese translations. Output the generated words in the following json format. The Japanese translations should be generated in Japanese.
+            
+              {"id" : "1", "word" : "word1", "translate" : "japanese translation1" },
+              {"id" : "2", "word" : "word2", "translate" : "japanese translation2" },
+              ...
+            
+        """.trimIndent()
         // Create the text prompt
         val prompt = createPrompt(inputTextPrompt)
 
