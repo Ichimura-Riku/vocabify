@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "learn")
 data class Learn(
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "learn_id")
     val id: Int = 0,
-    @ColumnInfo(name = "category")
-    val category: String,
+    @ColumnInfo(name = "category_id")
+    val category: Int,
     @ColumnInfo(name = "word")
     val word: String,
     @ColumnInfo(name = "translation")
