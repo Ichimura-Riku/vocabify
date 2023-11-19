@@ -28,6 +28,7 @@ object HomeDestination : NavigationDestination {
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    navAddVocabularyScreen: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     Scaffold { innerPadding ->
@@ -36,12 +37,16 @@ fun HomeScreen(
                 modifier
                     .fillMaxSize()
                     .padding(innerPadding),
+            navAddVocabularyScreen = navAddVocabularyScreen,
         )
     }
 }
 
 @Composable
-fun HomeContainer(modifier: Modifier = Modifier) {
+fun HomeContainer(
+    modifier: Modifier = Modifier,
+    navAddVocabularyScreen: () -> Unit,
+    ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,7 +66,7 @@ fun HomeContainer(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick =  navAddVocabularyScreen ) {
                 Text(text = "add Vocabulary")
             }
 
