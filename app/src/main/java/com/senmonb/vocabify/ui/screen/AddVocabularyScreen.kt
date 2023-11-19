@@ -61,7 +61,7 @@ fun AddVocabularyContainer(
             modifier = Modifier.fillMaxWidth(),
             value = inputText,
             onValueChange = setInputText,
-            label = { Text("Input:") }
+            label = { Text("input keyword") }
         )
         Button(
             onClick = {
@@ -69,22 +69,8 @@ fun AddVocabularyContainer(
             },
             modifier = Modifier.padding(8.dp)
         ) {
-            Text("Generate Text")
+            Text("entry")
         }
-        Card(
-            modifier = Modifier
-                .padding(vertical = 2.dp)
-                .fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = textOutput,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-        }
+
     }
 }
