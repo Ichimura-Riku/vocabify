@@ -47,7 +47,11 @@ fun HomeContainer(
         verticalArrangement = Arrangement.Center,
     ) {
         Text("Let's Learn Vocabulary")
-        Column() {
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
 
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "add Vocabulary")
